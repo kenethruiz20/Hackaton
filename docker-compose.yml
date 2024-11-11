@@ -1,0 +1,15 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5009:5000"  # Expose backend on port 5000
+    environment:
+      - DATABASE_URL=mysql+pymysql://admin:proyecto-cloud@database-1-instance-1.crmwqkaq0x91.us-east-1.rds.amazonaws.com:3306/contacts_db
+
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"  # Expose frontend on port 8080
+    volumes:
+      - ./frontend:/usr/share/nginx/html  # Serve static files from frontend directory
